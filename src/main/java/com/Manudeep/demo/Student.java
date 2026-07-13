@@ -1,5 +1,8 @@
 package com.Manudeep.demo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Student {
     private String name;
     private int age;
