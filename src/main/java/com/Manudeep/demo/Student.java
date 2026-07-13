@@ -10,7 +10,6 @@ public class Student {
         System.out.println("Hello world");
     }
     public Student(String name,int age){
-        this();
         setName(name);
         setAge(age);
     }
