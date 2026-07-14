@@ -1,4 +1,4 @@
-package com.Manudeep.demo;
+package com.Manudeep.demo.Java;
 
 class p{
     void m1(){
