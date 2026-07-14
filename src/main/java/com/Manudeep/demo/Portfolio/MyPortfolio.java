@@ -30,3 +30,21 @@ public class MyPortfolio {
                 """;
     }
 
+    @GetMapping("/education")
+    public String myEducation(){
+        return """
+                <h1> Education </h1>
+                
+                <h4> <em>Btech <strong> CSE </strong> </em></h4>
+                <p> Lovely Professional University </p>
+               
+                <h4><em>Intermediate </em></h4>
+                <p> Narayana Jr College </p>
+              
+                <h4><em> Secondary Education </em></h4>
+                <p> Sri Krishna Vibgyor High School <p/>
+                
+                """;
+    }
+
+}
