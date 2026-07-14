@@ -18,7 +18,6 @@ public class MyPortfolio {
                 """;
     }
 
-
     @GetMapping("/skills")
     public String mySkills(){
         return """
