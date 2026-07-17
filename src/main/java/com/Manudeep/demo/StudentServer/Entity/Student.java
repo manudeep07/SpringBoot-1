@@ -1,4 +1,4 @@
-package com.Manudeep.demo.StudentServer;
+package com.Manudeep.demo.StudentServer.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

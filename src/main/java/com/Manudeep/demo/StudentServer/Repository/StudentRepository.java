@@ -1,7 +1,7 @@
-package com.Manudeep.demo.StudentServer;
+package com.Manudeep.demo.StudentServer.Repository;
 
+import com.Manudeep.demo.StudentServer.Entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 
 public interface StudentRepository extends JpaRepository<Student,Integer> {
