@@ -2,11 +2,11 @@ package com.Manudeep.demo;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class Student {
     private String name;
     private int age;
-    private Student(){
+    public Student(){
         System.out.println("Hello world");
     }
     public Student(String name,int age){

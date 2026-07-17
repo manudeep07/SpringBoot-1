@@ -19,6 +19,9 @@ public class DemoApplication {
 //		OrderService orderService = context.getBean(OrderService.class);
 //		orderService.placeOrder();
 
+		Student student = new Student();
+		System.out.println(student);
+
 	}
 
 }
