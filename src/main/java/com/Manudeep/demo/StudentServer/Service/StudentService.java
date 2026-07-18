@@ -49,6 +49,11 @@ public class StudentService {
     }
 
     public String deleteStudentByid(int id) {
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+
+        if (existingStudent == null){
+            return null;
+        }
         studentRepository.deleteById(id);
         return "deleted";
     }

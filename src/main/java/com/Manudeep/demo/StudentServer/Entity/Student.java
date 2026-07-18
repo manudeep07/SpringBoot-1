@@ -1,17 +1,40 @@
 package com.Manudeep.demo.StudentServer.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Student {
     @Id
-    int id;
-    String name;
-    String department;
-    int age;
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
+   private String name;
+   private String department;
+   private  int age;
+   private LocalDateTime createdAt;
+   private LocalDateTime updatedAt;
+   public int getId() {
         return id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public void setId(int id) {
