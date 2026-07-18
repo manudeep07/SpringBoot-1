@@ -4,6 +4,8 @@ import com.Manudeep.demo.StudentServer.Service.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class StudentController {
 
@@ -30,6 +32,12 @@ public class StudentController {
     public ResponseEntity<?> getStudentByID(@PathVariable int id){
         Student student = studentService.getStudentByid(id);
         return ResponseEntity.status(200).body(student);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllStudents(){
+        List<Student> students = studentService.getAllStudents();
+        return ResponseEntity.status(200).body(students);
     }
 
     @PutMapping("/update/{id}")
