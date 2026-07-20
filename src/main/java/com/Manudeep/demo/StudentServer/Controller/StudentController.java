@@ -1,4 +1,6 @@
 package com.Manudeep.demo.StudentServer.Controller;
+import com.Manudeep.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.Manudeep.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.Manudeep.demo.StudentServer.Entity.Student;
 import com.Manudeep.demo.StudentServer.Service.StudentService;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,8 @@ public class StudentController {
     }
     // 1. Store the Student
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student){
-       Student result = studentService.studentValidate(student);
+    public ResponseEntity<CreateStudentResponseDTO> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO){
+       CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
        if(result == null)
        {

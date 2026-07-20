@@ -1,5 +1,7 @@
 package com.Manudeep.demo.StudentServer.Service;
 
+import com.Manudeep.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.Manudeep.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.Manudeep.demo.StudentServer.Entity.Student;
 import com.Manudeep.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +20,12 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student studentValidate(@NonNull Student student) {
-        int id = student.getId();
-        String name = student.getName();
-        int age = student.getAge();
-        String department = student.getDepartment();
+    public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
+        Student student = mapToStudent(createStudentRequestDTO);
 
-        if (id < 0 || name == null || age < 0 || department == null || name.isBlank() || department.isBlank()) {
-            return null;
-        }
-
-        student.setCreatedAt(LocalDateTime.now());
-        student.setUpdatedAt(LocalDateTime.now());
+        CreateStudentResponseDTO createStudentResponseDTO = mapToStudentResponseDTO(student);
         studentRepository.save(student);
-        return student;
+        return createStudentResponseDTO;
     }
 
     public Student getStudentByid(Integer id) {
@@ -67,5 +61,25 @@ public class StudentService {
     public List<Student> getAllStudents(){
         List<Student> students = studentRepository.findAll();
         return students;
+    }
+
+    private Student mapToStudent(CreateStudentRequestDTO createStudentRequestDTO){
+        Student student = new Student();
+
+        student.setName((createStudentRequestDTO.getName()));
+        student.setAge(createStudentRequestDTO.getAge());
+        student.setDepartment(createStudentRequestDTO.getDepartment());
+        student.setCreatedAt(LocalDateTime.now());
+        student.setUpdatedAt(LocalDateTime.now());
+        return student;
+    }
+
+    private CreateStudentResponseDTO mapToStudentResponseDTO(Student student){
+        CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
+        createStudentResponseDTO.setId(student.getId());
+        createStudentResponseDTO.setName(student.getName());
+        createStudentResponseDTO.setAge(student.getAge());
+        createStudentResponseDTO.setDepartment(student.getDepartment());
+        return createStudentResponseDTO;
     }
 }
