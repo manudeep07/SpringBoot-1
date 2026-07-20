@@ -24,9 +24,8 @@ public class StudentService {
 
     public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
         Student student = mapToStudent(createStudentRequestDTO);
-
+        student = studentRepository.save(student);
         CreateStudentResponseDTO createStudentResponseDTO = mapToStudentResponseDTO(student);
-        studentRepository.save(student);
         return createStudentResponseDTO;
     }
 
@@ -39,17 +38,14 @@ public class StudentService {
 
         Student existingStudent = studentRepository.findById(id).orElse(null);
 
-
-
         if (existingStudent == null) {
             return null;
         }
 
-        UpdateStudentResponseDTO updatedStudentResponse = mapToUpdateStudentResponseDTO(existingStudent);
-        if(updatedStudent.getName()!=null)
-          existingStudent.setName(updatedStudent.getName());
-
+        existingStudent.setName(updatedStudent.getName());
         existingStudent.setAge(updatedStudent.getAge());
+
+        UpdateStudentResponseDTO updatedStudentResponse = mapToUpdateStudentResponseDTO(existingStudent);
         studentRepository.save(existingStudent);
         return updatedStudentResponse;
     }
@@ -71,7 +67,6 @@ public class StudentService {
 
     private Student mapToStudent(CreateStudentRequestDTO createStudentRequestDTO){
         Student student = new Student();
-
         student.setName(createStudentRequestDTO.getName());
         student.setAge(createStudentRequestDTO.getAge());
         student.setDepartment(createStudentRequestDTO.getDepartment());
@@ -82,7 +77,9 @@ public class StudentService {
 
     private CreateStudentResponseDTO mapToStudentResponseDTO(Student student){
         CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
+//        System.out.println(student.getId());
         createStudentResponseDTO.setId(student.getId());
+
         createStudentResponseDTO.setName(student.getName());
         createStudentResponseDTO.setAge(student.getAge());
         createStudentResponseDTO.setDepartment(student.getDepartment());

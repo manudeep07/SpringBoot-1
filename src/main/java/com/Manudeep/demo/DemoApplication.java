@@ -1,6 +1,7 @@
 package com.Manudeep.demo;
 
 import com.Manudeep.demo.DependencyInjection.OrderService;
+import com.Manudeep.demo.Scope.LPU;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -18,8 +19,6 @@ public class DemoApplication {
 
 //		OrderService orderService = context.getBean(OrderService.class);
 //		orderService.placeOrder();
-
-
 	}
 
 }
