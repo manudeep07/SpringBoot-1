@@ -2,6 +2,8 @@ package com.Manudeep.demo.StudentServer.Service;
 
 import com.Manudeep.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.Manudeep.demo.StudentServer.DTO.CreateStudentResponseDTO;
+import com.Manudeep.demo.StudentServer.DTO.UpdateStudentRequestDTO;
+import com.Manudeep.demo.StudentServer.DTO.UpdateStudentResponseDTO;
 import com.Manudeep.demo.StudentServer.Entity.Student;
 import com.Manudeep.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +35,23 @@ public class StudentService {
         return student;
     }
 
-    public Student updateStudent(Integer id, Student updatedStudent) {
+    public UpdateStudentResponseDTO updateStudent(Integer id, UpdateStudentRequestDTO updatedStudent) {
 
         Student existingStudent = studentRepository.findById(id).orElse(null);
+
+
 
         if (existingStudent == null) {
             return null;
         }
 
-        existingStudent.setName(updatedStudent.getName());
-        existingStudent.setAge(updatedStudent.getAge());
-        existingStudent.setDepartment(updatedStudent.getDepartment());
+        UpdateStudentResponseDTO updatedStudentResponse = mapToUpdateStudentResponseDTO(existingStudent);
+        if(updatedStudent.getName()!=null)
+          existingStudent.setName(updatedStudent.getName());
 
-        return studentRepository.save(existingStudent);
+        existingStudent.setAge(updatedStudent.getAge());
+        studentRepository.save(existingStudent);
+        return updatedStudentResponse;
     }
 
     public String deleteStudentByid(int id) {
@@ -66,7 +72,7 @@ public class StudentService {
     private Student mapToStudent(CreateStudentRequestDTO createStudentRequestDTO){
         Student student = new Student();
 
-        student.setName((createStudentRequestDTO.getName()));
+        student.setName(createStudentRequestDTO.getName());
         student.setAge(createStudentRequestDTO.getAge());
         student.setDepartment(createStudentRequestDTO.getDepartment());
         student.setCreatedAt(LocalDateTime.now());
@@ -81,5 +87,15 @@ public class StudentService {
         createStudentResponseDTO.setAge(student.getAge());
         createStudentResponseDTO.setDepartment(student.getDepartment());
         return createStudentResponseDTO;
+    }
+
+    private UpdateStudentResponseDTO mapToUpdateStudentResponseDTO(Student student){
+        UpdateStudentResponseDTO updateStudentResponseDTO = new UpdateStudentResponseDTO();
+
+        updateStudentResponseDTO.setName(student.getName());
+        updateStudentResponseDTO.setAge(student.getAge());
+        updateStudentResponseDTO.setId(student.getId());
+        updateStudentResponseDTO.setDepartment(student.getDepartment());
+        return updateStudentResponseDTO;
     }
 }

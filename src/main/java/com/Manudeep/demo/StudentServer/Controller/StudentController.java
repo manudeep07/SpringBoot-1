@@ -1,6 +1,8 @@
 package com.Manudeep.demo.StudentServer.Controller;
 import com.Manudeep.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.Manudeep.demo.StudentServer.DTO.CreateStudentResponseDTO;
+import com.Manudeep.demo.StudentServer.DTO.UpdateStudentRequestDTO;
+import com.Manudeep.demo.StudentServer.DTO.UpdateStudentResponseDTO;
 import com.Manudeep.demo.StudentServer.Entity.Student;
 import com.Manudeep.demo.StudentServer.Service.StudentService;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +47,9 @@ public class StudentController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateStudent(
             @PathVariable Integer id,
-            @RequestBody Student student){
+            @RequestBody UpdateStudentRequestDTO updateStudentRequestDTO){
 
-        Student updatedStudent = studentService.updateStudent(id, student);
+        UpdateStudentResponseDTO updatedStudent = studentService.updateStudent(id, updateStudentRequestDTO);
 
         if(updatedStudent == null){
             return ResponseEntity.status(404).body("Student not found");
