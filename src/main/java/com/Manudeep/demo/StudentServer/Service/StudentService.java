@@ -25,6 +25,7 @@ public class StudentService {
 
     public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
         Student student = mapToStudent(createStudentRequestDTO);
+
         student = studentRepository.save(student);
         CreateStudentResponseDTO createStudentResponseDTO = mapToStudentResponseDTO(student);
         return createStudentResponseDTO;
