@@ -33,9 +33,9 @@ public class StudentController {
 
     // 2. read the Student with id
     @GetMapping("/getStudent/{id}")
-    public ResponseEntity<?> getStudentByID(@PathVariable int id){
+    public ResponseEntity<Student> getStudentByID(@PathVariable int id) {
         Student student = studentService.getStudentByid(id);
-        return ResponseEntity.status(200).body(student);
+        return ResponseEntity.ok(student);
     }
 
     @GetMapping("/getAll")
@@ -50,10 +50,6 @@ public class StudentController {
             @RequestBody UpdateStudentRequestDTO updateStudentRequestDTO){
 
         UpdateStudentResponseDTO updatedStudent = studentService.updateStudent(id, updateStudentRequestDTO);
-
-        if(updatedStudent == null){
-            return ResponseEntity.status(404).body("Student not found");
-        }
 
         return ResponseEntity.ok(updatedStudent);
     }

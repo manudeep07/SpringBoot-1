@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -29,18 +30,15 @@ public class StudentService {
         return createStudentResponseDTO;
     }
 
-    public Student getStudentByid(Integer id) {
-        Student student = studentRepository.findById(id).orElse(null);
-        return student;
+    public Student getStudentByid(int id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
     }
 
     public UpdateStudentResponseDTO updateStudent(Integer id, UpdateStudentRequestDTO updatedStudent) {
 
-        Student existingStudent = studentRepository.findById(id).orElse(null);
-
-        if (existingStudent == null) {
-            return null;
-        }
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
 
         existingStudent.setName(updatedStudent.getName());
         existingStudent.setAge(updatedStudent.getAge());
@@ -51,11 +49,8 @@ public class StudentService {
     }
 
     public String deleteStudentByid(int id) {
-        Student existingStudent = studentRepository.findById(id).orElse(null);
-
-        if (existingStudent == null){
-            return null;
-        }
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
         studentRepository.deleteById(id);
         return "deleted";
     }
